@@ -1,13 +1,10 @@
-import { initializeApp, getApps } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-
+import { initializeApp} from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/auth'
 import 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
-// Firebaseの不要な初期化を防ぐ条件文
-if (typeof window !== 'undefined' && getApps().length === 0)
- {
     const firebaseConfig = {
       apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -16,7 +13,9 @@ if (typeof window !== 'undefined' && getApps().length === 0)
       messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
       appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
       measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-    }
-    initializeApp(firebaseConfig)
-    getAnalytics()
-  }
+    };
+
+  export const app = initializeApp(firebaseConfig);
+  export const db = getFirestore();
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();

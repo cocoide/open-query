@@ -1,7 +1,8 @@
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-black h-10 w-full">
+      あ
     </div>
   )
 }
